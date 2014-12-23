@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <style>
+        .selected {
+            background-color: lightgreen;
+        }
+    </style>
+    <script src="../Library/angular.js"></script>
+    <script src="../Service/CartServie.js"></script>
+</head>
+<body ng-app="ShoppingModule" ng-controller="cartCotroller">
+    <h1>Your Order</h1>
+    <div ng-repeat="item in items">
+        <span>{{item.name}}</span>
+        <input value="{{item.quantity|uppercase}}" />
+        <span>{{item.price | currency }}</span>
+        <span>{{item.price*item.quantity | currency}}</span>
+        <button ng-click="remove($index)">Remove</button>
+    </div>
+    <div>TotalPrice:{{bill.totalPrice|currency}}</div>
+    <div>Discount:{{bill.discount|currency}}</div>
+    <div>SubTotal:{{bill.subTotal|currency}}</div>
+    <script type="text/javascript">
+        function cartCotroller($scope, itemss) {
+            $scope.bill = {};
+            $scope.items = itemss.query();
+            $scope.remove = function (index) {
+                $scope.items.splice(index, 1);
+            }
+
+            function caculateTotal() {
+                var total = 0;
+                for (i = 0; i < $scope.items.length; i++) {
+                    total += $scope.items[i].price * $scope.items[i].quantity;
+                }
+
+                $scope.bill.totalPrice = total;
+                $scope.bill.discount = total > 100 ? 10 : 0;
+                $scope.bill.subTotal = total - $scope.bill.discount;
+            }
+
+            $scope.$watch(caculateTotal);
+        }
+    </script>
+</body>
+</html>

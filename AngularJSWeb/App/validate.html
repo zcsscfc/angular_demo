@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+
+</head>
+<body ng-app="">
+    <form name="userForm" ng-controller="someController">
+        <div>
+            <div ng-show="message">{{message}}</div>
+            <table>
+                <tr>
+                    <td>First Name:</td>
+                    <td><input ng-model="user.first" required /></td>
+                    <td>Last Name:</td>
+                    <td><input ng-model="user.last" required /></td>
+                </tr>
+                <tr>
+                    <td>Mail:</td>
+                    <td><input type="email" ng-model="user.email" required /></td>
+                    <td>Age:</td>
+                    <td><input type="number" ng-model="user.age" required ng-maxlength="3" ng-minlength="1" /></td>
+                </tr>
+            </table>
+            <button ng-click='addUser()'
+                    ng-disabled='!userForm.$valid'>
+                Submit
+            </button>
+        </div>
+    </form>
+    <script src="../Library/angular.js"></script>
+    <script type="text/javascript">
+
+        function someController($scope) {
+            $scope.message = "";
+            $scope.addUser = function () {
+                $scope.message = 'Thanks, ' + $scope.user.first + ' ,we added you';
+            }
+        }
+        
+    </script>
+</body>
+</html>

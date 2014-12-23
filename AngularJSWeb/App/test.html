@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+</head>
+<body ng-app="HomeMoudle">
+
+    <div ng-controller="testController">
+        <h1>{{title|titleCase}}</h1>
+    </div>
+    <script src="../Library/angular.js"></script>
+    <script type="text/javascript">
+
+        angular.module("HomeMoudle", []).filter("titleCase", function () {
+            return function (input) {
+                var words = input.split(' ');
+                for (var i = 0; i < words.length; i++) {
+                    words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1);
+                }
+                return words.join(' ');
+            }
+        });
+
+        function testController($scope) {
+            $scope.title = "behold the majesty of your page title";
+        }
+    </script>
+</body>
+</html>
