@@ -3,12 +3,20 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
+    <style>
+        input.ng-invalid {
+            border: 1px solid red;
+        }
 
+        input.ng-valid {
+            border: 1px solid green;
+        }
+    </style>
 </head>
 <body ng-app="">
     <form name="userForm" ng-controller="someController">
         <div>
-            <div ng-show="message">{{message}}</div>
+            <div ng-show="message"> {{message}}</div>
             <table>
                 <tr>
                     <td>First Name:</td>
@@ -38,7 +46,7 @@
                 $scope.message = 'Thanks, ' + $scope.user.first + ' ,we added you';
             }
         }
-        
+
     </script>
 </body>
 </html>
