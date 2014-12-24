@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+</head>
+<body>
+    <div ng-app="clockapp" ng-controller="clockController">
+        <h1>{{clock}}</h1>
+    </div>
+    <script src="../Library/angular.js"></script>
+    <script type="text/javascript">
+        angular.module("clockapp", []).controller("clockController", function ($scope, $timeout) {
+            var updateClock = function () {
+                $scope.clock = new Date().toLocaleString();
+                $timeout(function () {
+                    updateClock();
+                }, 1000);
+            }
+           
+            updateClock();
+        });
+
+    </script>
+</body>
+</html>
